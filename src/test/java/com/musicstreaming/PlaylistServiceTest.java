@@ -1,4 +1,4 @@
-package com.musicstreaming.test;
+package com.musicstreaming;
 
 import com.musicstreaming.entity.Playlist;
 import com.musicstreaming.service.PlaylistService;
