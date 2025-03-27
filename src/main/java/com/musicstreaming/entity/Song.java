@@ -1,4 +1,4 @@
-package com.example;
+package com.musicstreaming.entity;
 
 import jakarta.persistence.*;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example;
+package com.musicstreaming;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
