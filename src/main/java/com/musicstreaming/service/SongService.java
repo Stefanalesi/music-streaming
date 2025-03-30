@@ -12,6 +12,14 @@ public class SongService {
     SongRepository songRepository;
 
     public List<Song> getAllSongs() {
-        return songRepository.getAllSongs();
+        return songRepository.findAll();
+    }
+
+    public List<Song> getSongsByArtist(Long artistId) {
+        return songRepository.findSongsByArtist(artistId);
+    }
+
+    public Long getSongCountByArtist(Long artistId) {
+        return songRepository.countSongsByArtist(artistId);
     }
 }
