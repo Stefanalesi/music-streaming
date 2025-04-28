@@ -12,6 +12,18 @@ public class PlaylistService {
     }
 
     public List<Playlist> getAllPlaylists() {
-        return playlistRepository.getAllPlaylists();
+        try {
+            return playlistRepository.getAllPlaylists();
+        } finally {
+            playlistRepository.close();
+        }
+    }
+
+    public void save(Playlist playlist) {
+        try {
+            playlistRepository.save(playlist);
+        } finally {
+            playlistRepository.close();
+        }
     }
 }

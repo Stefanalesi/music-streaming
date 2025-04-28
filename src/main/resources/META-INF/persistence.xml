@@ -5,20 +5,16 @@
     <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
-            <property name="jakarta.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
-            <property name="jakarta.persistence.jdbc.user" value="system"/>
-            <property name="jakarta.persistence.jdbc.password" value="oracle"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:musicdb;DB_CLOSE_DELAY=-1"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
-            <property name="hibernate.jdbc.batch_size" value="0"/>
-            <property name="hibernate.connection.pool_size" value="1"/>
-            <property name="hibernate.connection.autocommit" value="false"/>
-            <property name="hibernate.generate_statistics" value="true"/>
-            <property name="hibernate.session.events.log" value="true"/>
+            <property name="hibernate.connection.pool_size" value="5"/>
         </properties>
     </persistence-unit>
 </persistence> 

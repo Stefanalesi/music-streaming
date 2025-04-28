@@ -10,30 +10,21 @@ public class ArtistRepository {
 
     public ArtistRepository() {
         this.em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        // Test database connection
-        try {
-            em.createNativeQuery("SELECT 1 FROM DUAL").getSingleResult();
-            System.out.println("Database connection successful");
-        } catch (Exception e) {
-            System.err.println("Database connection failed: " + e.getMessage());
-            e.printStackTrace();
-            throw e;
-        }
     }
 
     public List<Artist> getAllArtists() {
         try {
             return em.createQuery("SELECT a FROM Artist a", Artist.class).getResultList();
-        } finally {
-            em.close();
+        } catch (Exception e) {
+            throw new RuntimeException("Error getting all artists", e);
         }
     }
 
     public Artist getArtistById(Long id) {
         try {
             return em.find(Artist.class, id);
-        } finally {
-            em.close();
+        } catch (Exception e) {
+            throw new RuntimeException("Error getting artist by id", e);
         }
     }
 
@@ -50,8 +41,12 @@ public class ArtistRepository {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            throw e;
-        } finally {
+            throw new RuntimeException("Error saving artist", e);
+        }
+    }
+
+    public void close() {
+        if (em != null && em.isOpen()) {
             em.close();
         }
     }

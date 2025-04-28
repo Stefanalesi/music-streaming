@@ -12,18 +12,34 @@ public class SongService {
     }
 
     public List<Song> getAllSongs() {
-        return songRepository.findAll();
+        try {
+            return songRepository.findAll();
+        } finally {
+            songRepository.close();
+        }
     }
 
     public List<Song> getSongsByArtist(Long artistId) {
-        return songRepository.findSongsByArtist(artistId);
+        try {
+            return songRepository.findSongsByArtist(artistId);
+        } finally {
+            songRepository.close();
+        }
     }
 
     public Long getSongCountByArtist(Long artistId) {
-        return songRepository.countSongsByArtist(artistId);
+        try {
+            return songRepository.countSongsByArtist(artistId);
+        } finally {
+            songRepository.close();
+        }
     }
 
     public void save(Song song) {
-        songRepository.save(song);
+        try {
+            songRepository.save(song);
+        } finally {
+            songRepository.close();
+        }
     }
 }

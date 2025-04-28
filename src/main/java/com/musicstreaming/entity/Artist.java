@@ -1,16 +1,11 @@
 package com.musicstreaming.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class Artist {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    public String name;
+@Table(name = "USER")
+@DiscriminatorValue("ARTIST")
+public class Artist extends User {
     public String genre;
     public String country;
 }

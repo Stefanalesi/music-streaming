@@ -12,6 +12,18 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return userRepository.getAllUsers();
+        try {
+            return userRepository.getAllUsers();
+        } finally {
+            userRepository.close();
+        }
+    }
+
+    public void save(User user) {
+        try {
+            userRepository.save(user);
+        } finally {
+            userRepository.close();
+        }
     }
 }

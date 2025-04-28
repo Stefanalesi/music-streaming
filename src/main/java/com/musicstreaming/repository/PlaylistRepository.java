@@ -1,20 +1,45 @@
 package com.musicstreaming.repository;
 
 import com.musicstreaming.entity.Playlist;
+import com.musicstreaming.util.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import java.util.List;
 
 public class PlaylistRepository {
     private final EntityManager em;
 
     public PlaylistRepository() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-        this.em = emf.createEntityManager();
+        this.em = JPAUtil.getEntityManagerFactory().createEntityManager();
     }
 
     public List<Playlist> getAllPlaylists() {
-        return em.createQuery("SELECT p FROM Playlist p", Playlist.class).getResultList();
+        try {
+            return em.createQuery("SELECT p FROM Playlist p", Playlist.class).getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error getting all playlists", e);
+        }
+    }
+
+    public void save(Playlist playlist) {
+        try {
+            em.getTransaction().begin();
+            if (playlist.id == null) {
+                em.persist(playlist);
+            } else {
+                em.merge(playlist);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException("Error saving playlist", e);
+        }
+    }
+
+    public void close() {
+        if (em != null && em.isOpen()) {
+            em.close();
+        }
     }
 }

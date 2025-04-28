@@ -12,14 +12,26 @@ public class ArtistService {
     }
 
     public List<Artist> getAllArtists() {
-        return artistRepository.getAllArtists();
+        try {
+            return artistRepository.getAllArtists();
+        } finally {
+            artistRepository.close();
+        }
     }
 
     public Artist getArtistById(Long id) {
-        return artistRepository.getArtistById(id);
+        try {
+            return artistRepository.getArtistById(id);
+        } finally {
+            artistRepository.close();
+        }
     }
 
     public void save(Artist artist) {
-        artistRepository.save(artist);
+        try {
+            artistRepository.save(artist);
+        } finally {
+            artistRepository.close();
+        }
     }
 }
