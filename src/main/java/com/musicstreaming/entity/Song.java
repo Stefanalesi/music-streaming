@@ -20,4 +20,3 @@ public class Song {
     )
     private List<Artist> artists;
 }
-

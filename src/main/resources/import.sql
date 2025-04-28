@@ -1,7 +1,7 @@
-INSERT INTO user (id, username, email) VALUES (1, 'john_doe', 'john@example.com');
-INSERT INTO user (id, username, email) VALUES (2, 'jane_doe', 'jane@example.com');
-INSERT INTO user (id, username, email) VALUES (3, 'alice_smith', 'alice@example.com');
-INSERT INTO user (id, username, email) VALUES (4, 'bob_jones', 'bob@example.com');
+INSERT INTO user (id, username, email, user_type) VALUES (1, 'john_doe', 'john@example.com', 'NORMAL');
+INSERT INTO user (id, username, email, user_type) VALUES (2, 'jane_doe', 'jane@example.com', 'NORMAL');
+INSERT INTO user (id, username, email, user_type) VALUES (3, 'alice_smith', 'alice@example.com', 'PREMIUM');
+INSERT INTO user (id, username, email, user_type) VALUES (4, 'bob_jones', 'bob@example.com', 'PREMIUM');
 
 INSERT INTO artist (id, name, genre) VALUES (1, 'Drake', 'Hip-Hop');
 INSERT INTO artist (id, name, genre) VALUES (2, 'Adele', 'Pop');
