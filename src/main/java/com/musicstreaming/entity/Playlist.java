@@ -13,7 +13,7 @@ public class Playlist {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    public User user;
 
     @ManyToMany
     @JoinTable(
