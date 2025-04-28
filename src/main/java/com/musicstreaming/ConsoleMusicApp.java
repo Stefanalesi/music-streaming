@@ -12,6 +12,7 @@ import com.musicstreaming.util.JPAUtil;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.LogManager;
+import java.io.InputStream;
 
 public class ConsoleMusicApp {
     private static final SongService songService = new SongService();
@@ -20,8 +21,25 @@ public class ConsoleMusicApp {
     private static final PlaylistService playlistService = new PlaylistService();
 
     static {
-        // Set the logging manager before any logging occurs
-        System.setProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager");
+        try {
+            // Set the LogManager system property before any logging occurs
+            System.setProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager");
+            
+            // Initialize LogManager
+            LogManager.getLogManager().reset();
+            
+            // Configure logging
+            InputStream is = ConsoleMusicApp.class.getClassLoader().getResourceAsStream("logging.properties");
+            if (is != null) {
+                LogManager.getLogManager().readConfiguration(is);
+                System.out.println("Logging configuration loaded successfully");
+            } else {
+                System.err.println("Could not find logging.properties");
+            }
+        } catch (Exception e) {
+            System.err.println("Error configuring logging: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
