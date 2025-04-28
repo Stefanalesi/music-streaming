@@ -14,8 +14,7 @@ public class JPAUtil {
         try {
             logger.info("Initializing EntityManagerFactory...");
             System.out.println("Creating EntityManagerFactory...");
-            
-            // Print system properties for debugging
+
             System.out.println("Java version: " + System.getProperty("java.version"));
             System.out.println("Classpath: " + System.getProperty("java.class.path"));
             

@@ -22,13 +22,10 @@ public class ConsoleMusicApp {
 
     static {
         try {
-            // Set the LogManager system property before any logging occurs
             System.setProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager");
-            
-            // Initialize LogManager
+
             LogManager.getLogManager().reset();
-            
-            // Configure logging
+
             InputStream is = ConsoleMusicApp.class.getClassLoader().getResourceAsStream("logging.properties");
             if (is != null) {
                 LogManager.getLogManager().readConfiguration(is);
@@ -45,11 +42,10 @@ public class ConsoleMusicApp {
     public static void main(String[] args) {
         try {
             System.out.println("Starting application...");
-            
-            // Initialize services
+
             System.out.println("Initializing services...");
             try {
-                songService.toString(); // Force initialization
+                songService.toString();
                 artistService.toString();
                 userService.toString();
                 playlistService.toString();
@@ -75,7 +71,7 @@ public class ConsoleMusicApp {
 
                 try {
                     int choice = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
 
                     switch (choice) {
                         case 1:
@@ -109,7 +105,7 @@ public class ConsoleMusicApp {
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                     e.printStackTrace();
-                    scanner.nextLine(); // Clear the input buffer
+                    scanner.nextLine();
                 }
             }
         } catch (Exception e) {
@@ -138,7 +134,7 @@ public class ConsoleMusicApp {
         System.out.print("Enter Artist ID: ");
         try {
             long artistId = scanner.nextLong();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
             List<Song> songs = songService.getSongsByArtist(artistId);
             System.out.println("\nSongs by Artist ID " + artistId + ":");
             for (Song song : songs) {
@@ -181,12 +177,11 @@ public class ConsoleMusicApp {
             
             System.out.print("Enter duration (in seconds): ");
             int duration = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
             
             System.out.print("Enter release date (YYYY-MM-DD): ");
             String releaseDate = scanner.nextLine();
-            
-            // Display available artists
+
             List<Artist> artists = artistService.getAllArtists();
             System.out.println("\nAvailable Artists:");
             for (Artist artist : artists) {
@@ -195,14 +190,13 @@ public class ConsoleMusicApp {
             
             System.out.print("Enter Artist ID (or 0 to skip): ");
             long artistId = scanner.nextLong();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
             
             Song song = new Song();
             song.title = title;
             song.duration = duration;
             song.releaseDate = releaseDate;
-            
-            // Link with artist if one was selected
+
             if (artistId > 0) {
                 Artist artist = artistService.getArtistById(artistId);
                 if (artist != null) {
